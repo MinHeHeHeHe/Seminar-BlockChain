@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Test Page</title>
+</head>
+
+<body>
+    <h1>Test Page</h1>
+    <button id="testBtn">Click Me!</button>
+    <div id="output"></div>
+
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
+    <script>
+        document.getElementById('testBtn').addEventListener('click', function () {
+            document.getElementById('output').innerHTML = 'Button works! ✅<br>';
+
+            // Test ethers.js
+            try {
+                const provider = new ethers.providers.JsonRpcProvider("http://localhost:8545");
+                document.getElementById('output').innerHTML += 'Ethers.js loaded ✅<br>';
+
+                provider.getNetwork().then(network => {
+                    document.getElementById('output').innerHTML += `Connected to network ${network.chainId} ✅<br>`;
+                }).catch(e => {
+                    document.getElementById('output').innerHTML += `Network error: ${e.message} ❌<br>`;
+                });
+            } catch (e) {
+                document.getElementById('output').innerHTML += `Ethers error: ${e.message} ❌<br>`;
+            }
+        });
+
+        console.log('Test page loaded!');
+    </script>
+</body>
+
+</html>
