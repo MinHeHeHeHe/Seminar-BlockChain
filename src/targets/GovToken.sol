@@ -21,9 +21,9 @@ contract GovToken {
     event Approval(address indexed owner, address indexed spender, uint256 value);
     event VotingPowerChanged(address indexed account, uint256 newVotingPower, uint256 blockNumber);
 
-    constructor(uint256 initialSupply) {
-        _mint(msg.sender, initialSupply);
-    }
+    constructor(address initialHolder, uint256 initialSupply) {
+    _mint(initialHolder, initialSupply);
+}
 
     function transfer(address to, uint256 amount) external returns (bool) {
         return _transfer(msg.sender, to, amount);

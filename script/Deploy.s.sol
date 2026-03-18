@@ -15,6 +15,10 @@ import "../src/targets/GovToken.sol";
 import "../src/targets/GovernanceWeak.sol";
 import "../src/targets/VaultBuggy.sol";
 
+// Thêm thư viện tương ứng để dùng log.console
+import "forge-std/console.sol";
+
+
 contract DeployScript is Script {
     // Tokens
     MockERC20 public tokenA;
@@ -77,7 +81,11 @@ contract DeployScript is Script {
         tokenA = new MockERC20("Token A", "TKA", 1000000 * 1e18);
         tokenB = new MockERC20("Token B", "TKB", 1000000 * 1e18);
         dai = new MockERC20("DAI Stablecoin", "DAI", 10000000 * 1e18);
-        govToken = new GovToken(10000000 * 1e18);
+        govToken = new GovToken(msg.sender, 10000000 * 1e18);
+
+        // Thêm log để sửa
+        console.log("EOA gov balance:", govToken.balanceOf(msg.sender));
+        console.log("Script gov balance:", govToken.balanceOf(address(this)));
     }
 
     function deployDEX() internal {
