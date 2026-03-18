@@ -142,7 +142,9 @@ contract DeployScript is Script {
         tokenA.transfer(address(flashLender), 100000 * 1e18);
         tokenB.transfer(address(flashLender), 100000 * 1e18);
         dai.transfer(address(flashLender), 100000 * 1e18);
-        govToken.transfer(address(flashLender), 1000000 * 1e18);
+
+        // Fund FlashLender with GOV for governance attack demo
+        govToken.mint(address(flashLender), 1000000 * 1e18);
     }
 
     function deployTargets() internal {
