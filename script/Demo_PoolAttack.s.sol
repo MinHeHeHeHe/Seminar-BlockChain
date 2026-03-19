@@ -4,12 +4,16 @@ pragma solidity ^0.8.19;
 import "./Deploy.s.sol";
 import "../src/attackers/Attacker_PoolImbalance.sol";
 
-contract DemoPoolAttack {
+// Thêm khi fix theo cách 2
+import "forge-std/Script.sol";
+
+
+contract DemoPoolAttack is Script {
     DeployScript public deploy;
     Attacker_PoolImbalance public attacker;
     
     function run() external {
-        address deployer = msg.sender;
+        // address deployer = msg.sender;
         
         // 1. Deploy infrastructure
         deploy = new DeployScript();
@@ -73,11 +77,15 @@ contract DemoPoolAttack {
             console("Victim attempts to deposit 25,000 tokenA...");
             
             address victim = address(0x1234);
-            MockERC20(tokenA).mint(victim, 25000 * 1e18);
-            
-            // Victim deposits
-            MockERC20(tokenA).approve(vaultBuggy, type(uint256).max);
+            MockERC20 token = MockERC20(tokenA);
+
+            token.mint(victim, 25000 * 1e18);
+
+            // Victim really approves and deposits
+            vm.startPrank(victim);
+            token.approve(vaultBuggy, type(uint256).max);
             uint256 victimShares = VaultBuggy(vaultBuggy).deposit(25000 * 1e18);
+            vm.stopPrank();
             
             console("  Victim received shares:", victimShares);
             console("  Expected: ~25,000 shares");
