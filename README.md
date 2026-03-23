@@ -6,7 +6,6 @@ Dự án demo các loại tấn công phổ biến trong DeFi (Oracle Manipulati
 ## 📋 Mục Lục
 
 - [Kiến Trúc](#kiến-trúc)
-- [Cài Đặt](#cài-đặt)
 - [Các Attack Vectors](#các-attack-vectors)
 - [Các Lỗ Hổng Và Cách Khắc Phục](#các-lỗ-hổng-và-cách-khắc-phục)
 
@@ -46,28 +45,7 @@ Dự án demo các loại tấn công phổ biến trong DeFi (Oracle Manipulati
 │  • Attacker_PoolImbalance.sol (exploit vault bugs)                │
 │  • Scripts: Deploy, Demo_Oracle, Demo_Governance, Demo_Pool      │
 └───────────────────────────────────────────────────────────────────┘
-```
 
-## 🛠️ Cài Đặt
-
-### Yêu Cầu
-
-- Foundry
-- Node.js
-
-### Cài Đặt Foundry
-
-```bash
-curl -L https://foundry.paradigm.xyz | bash
-foundryup
-```
-
-### Clone và Build
-
-```bash
-cd defi-security-demo
-forge build
-```
 
 ## 🎯 Các Attack Vectors
 

@@ -50,8 +50,6 @@ forge script script/Demo_PoolAttack.s.sol \
   --private-key 0x2a871d0798f97d79848a013d4936a73bf4cc922c825d33c1cf7073dff6d409c6
 ```
 
-**Note**: Private key trên là test key mặc định của Anvil, an toàn để dùng cho local testing.
-
 ---
 
 ## 🎯 Hiểu Từng Attack

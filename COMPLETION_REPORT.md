@@ -62,20 +62,6 @@ Sau khi hoàn thành project này, bạn sẽ hiểu:
 
 ---
 
-## 🌟 Highlights
-
-### Most Complex Component
-**UniV2Pair.sol** - Complete Uniswap V2 pair implementation with flash swap support
-
-### Most Educational Component
-**Attacker_Oracle.sol** - Shows real-world oracle manipulation attack step-by-step
-
-### Best Documentation
-**TUTORIAL.md** - 12KB of detailed explanations with code walkthroughs
-
-### Most Practical
-**Demo Scripts** - Ready-to-run attack demonstrations
-
 ## 🎉 Conclusion
 Project này là một tài liệu để học về DeFi security, từ ý tưởng cơ bản đến kĩ thuật nâng cao và cách phòng chống.
 

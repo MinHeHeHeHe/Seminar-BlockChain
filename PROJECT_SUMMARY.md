@@ -1,356 +1,169 @@
-# 📊 Project Summary - DeFi Security Demo
-
-## ✅ Hoàn Thành Đầy Đủ
-
-Dự án đã được implement hoàn chỉnh theo đúng kiến trúc yêu cầu với tất cả các layer và components.
+# 📊 Project Summary – DeFi Security Demo
 
 ---
 
-## 🏗️ Kiến Trúc Đã Implement
+## 🏗️ Kiến trúc hệ thống đã triển khai
 
-### 1. ENV & TOOLING LAYER ✅
-- ✅ Foundry configuration (`foundry.toml`)
-- ✅ Package.json với scripts
-- ✅ Hỗ trợ Anvil và Hardhat node
-- ✅ Environment variables template
+### 1. Environment & Tooling Layer
 
-### 2. PROTOCOL SIMULATION LAYER ✅
+* Cấu hình Foundry qua `foundry.toml`
+* `package.json` kèm các script hỗ trợ chạy demo
+* Hỗ trợ môi trường local với **Anvil** và **Hardhat node**
+* Mẫu cấu hình biến môi trường
 
-#### A. DEX Layer (AMM) ✅
-- ✅ `UniV2Factory.sol` - Factory contract để tạo pairs
-- ✅ `UniV2Pair.sol` - Pair contract với **Flash Swap** support
-- ✅ `UniV2Router.sol` - Router để add/remove liquidity và swap
-- ✅ `StablePoolBuggy.sol` - Curve-like pool với bugs
-- ✅ `StablePoolFixed.sol` - Version đã fix
-- ✅ Libraries: `Math.sol`, `UQ112x112.sol`
-- ✅ Interfaces: `IUniV2Pair.sol`
+### 2. Protocol Simulation Layer
 
-#### B. Oracle Layer ✅
-- ✅ `OracleSpot.sol` - Đọc reserves trực tiếp (vulnerable)
-- ✅ `OracleTWAP.sol` - Time-Weighted Average Price (secure)
+#### A. DEX Layer (AMM)
 
-#### C. Credit Layer ✅
-- ✅ `FlashLender.sol` - Flash loan provider (Aave-style)
-- ✅ ERC3156 compliant
-- ✅ Configurable fee structure
+* `UniV2Factory.sol` – Factory dùng để tạo các pair
+* `UniV2Pair.sol` – Pair contract hỗ trợ **flash swap**
+* `UniV2Router.sol` – Router phục vụ add/remove liquidity và swap
+* `StablePoolBuggy.sol` – Stable pool mô phỏng có lỗ hổng
+* `StablePoolFixed.sol` – Phiên bản đã khắc phục
+* Thư viện hỗ trợ: `Math.sol`, `UQ112x112.sol`
+* Interface: `IUniV2Pair.sol`
 
-#### D. Target Protocols ✅
-- ✅ `LendingMock.sol` - Lending protocol sử dụng oracle (vulnerable)
-- ✅ `GovToken.sol` - ERC20 governance token với voting power
-- ✅ `GovernanceWeak.sol` - Governance với vote-time checking (vulnerable)
-- ✅ `VaultBuggy.sol` - Vault với accounting bugs
-- ✅ `VaultFixed.sol` - Version đã fix
+#### B. Oracle Layer
 
-### 3. ATTACKER / DEMO LAYER ✅
+* `OracleSpot.sol` – Oracle đọc trực tiếp reserves, dễ bị thao túng
+* `OracleTWAP.sol` – Oracle dùng Time-Weighted Average Price an toàn hơn
 
-#### Attacker Contracts ✅
-- ✅ `Attacker_Oracle.sol` - Oracle price manipulation attack
-  - Flash swap để manipulate reserves
-  - Over-borrow từ lending protocol
-  - Profit extraction
-  
-- ✅ `Attacker_Governance.sol` - Governance takeover attack
-  - Flash loan GOV tokens
-  - Vote trong cùng transaction
-  - Execute malicious proposals
-  
-- ✅ `Attacker_PoolImbalance.sol` - Pool/Vault exploits
-  - Share inflation attack
-  - Donation front-run attack
-  - Reentrancy attempts
+#### C. Credit Layer
 
-#### Demo Scripts ✅
-- ✅ `Deploy.s.sol` - Deploy toàn bộ infrastructure
-- ✅ `Demo_OracleAttack.s.sol` - Demo oracle manipulation
-- ✅ `Demo_GovernanceAttack.s.sol` - Demo governance attack
-- ✅ `Demo_PoolAttack.s.sol` - Demo vault/pool exploits
+* `FlashLender.sol` – Flash loan provider theo phong cách Aave
+* Tuân theo chuẩn ERC3156
+* Có thể cấu hình mức phí
 
-### 4. UTILITIES ✅
-- ✅ `MockERC20.sol` - ERC20 token for testing
+#### D. Target Protocols
 
----
+* `LendingMock.sol` – Lending protocol dùng oracle, có chủ đích giữ lỗ hổng để demo
+* `GovToken.sol` – Governance token dùng cho voting power
+* `GovernanceWeak.sol` – Governance kiểm tra voting power tại thời điểm vote
+* `VaultBuggy.sol` – Vault có lỗi accounting/share minting
+* `VaultFixed.sol` – Phiên bản đã sửa lỗi
 
-## 📁 Cấu Trúc Files (22 Solidity files)
+### 3. Attacker / Demo Layer
 
-```
-src/
-├── dex/ (7 files)
-│   ├── UniV2Factory.sol
-│   ├── UniV2Pair.sol (with flash swap!)
-│   ├── UniV2Router.sol
-│   ├── StablePoolMock.sol (Buggy + Fixed)
-│   ├── interfaces/IUniV2Pair.sol
-│   └── libraries/
-│       ├── Math.sol
-│       └── UQ112x112.sol
-│
-├── oracle/ (2 files)
-│   ├── OracleSpot.sol (Vulnerable)
-│   └── OracleTWAP.sol (Secure)
-│
-├── credit/ (1 file)
-│   └── FlashLender.sol
-│
-├── targets/ (4 files)
-│   ├── LendingMock.sol
-│   ├── GovToken.sol
-│   ├── GovernanceWeak.sol
-│   └── VaultBuggy.sol (Buggy + Fixed)
-│
-├── attackers/ (3 files)
-│   ├── Attacker_Oracle.sol
-│   ├── Attacker_Governance.sol
-│   └── Attacker_PoolImbalance.sol
-│
-└── MockERC20.sol (1 file)
+#### Attacker Contracts
 
-script/ (4 files)
-├── Deploy.s.sol
-├── Demo_OracleAttack.s.sol
-├── Demo_GovernanceAttack.s.sol
-└── Demo_PoolAttack.s.sol
-```
+* `Attacker_Oracle.sol` – Tấn công thao túng giá oracle
+
+  * Flash swap để làm lệch reserves
+  * Over-borrow từ lending protocol
+  * Rút lợi nhuận từ chênh lệch định giá
+
+* `Attacker_Governance.sol` – Tấn công chiếm quyền governance
+
+  * Flash loan GOV token
+  * Vote bằng voting power đi vay
+  * Thực thi proposal độc hại
+
+* `Attacker_PoolImbalance.sol` – Contract tổng hợp các exploit liên quan đến vault/pool
+
+  * Share inflation attack
+  * Donation front-run attack
+  * Reentrancy attempts
+
+#### Demo Scripts
+
+* `Deploy.s.sol` – Triển khai toàn bộ hạ tầng mô phỏng
+* `Demo_OracleAttack.s.sol` – Demo thao túng oracle
+* `Demo_GovernanceAttack.s.sol` – Demo governance takeover
+* `Demo_PoolAttack.s.sol` – Demo các exploit liên quan đến vault/pool
+
+### 4. Utilities
+
+* `MockERC20.sol` – Token ERC20 phục vụ test và mô phỏng
 
 ---
 
-## 📚 Documentation (5 files)
+## 🎯 Các hướng tấn công đã triển khai
 
-- ✅ **README.md** (11KB)
-  - Overview dự án
-  - Kiến trúc chi tiết
-  - Attack vectors explained
-  - Cách cài đặt và chạy
-  - Mitigations
-  - References
+### 1. Oracle Price Manipulation
 
-- ✅ **TUTORIAL.md** (12KB)
-  - Hướng dẫn chi tiết từng attack
-  - Code walkthrough
-  - Step-by-step explanations
-  - Lab exercises
-  - Further learning resources
+**Lỗ hổng:** Spot price oracle có thể bị thao túng trong cùng transaction.
 
-- ✅ **QUICKSTART.md** (3KB)
-  - 5-minute setup guide
-  - Quick commands
-  - Troubleshooting
-  - Next steps
+**Thành phần liên quan:**
 
-- ✅ **PROJECT_SUMMARY.md** (this file)
-  - Tổng quan dự án
-  - Checklist features
+* Vulnerable: `OracleSpot.sol`
+* Secure: `OracleTWAP.sol`
+* Target: `LendingMock.sol`
+* Attacker: `Attacker_Oracle.sol`
+* Demo: `Demo_OracleAttack.s.sol`
 
-- ✅ **.env.example**
-  - Environment variables template
-  - Safe test keys
+**Luồng tấn công:**
+
+1. Attacker dùng flash swap từ DEX để làm lệch reserves
+2. Oracle spot đọc mức giá sai lệch
+3. Lending protocol định giá collateral sai
+4. Attacker vay vượt mức cho phép
+5. Hoàn trả flash swap và giữ phần lợi nhuận
+
+**Biện pháp khắc phục:**
+Sử dụng **TWAP** thay vì spot price.
 
 ---
 
-## 🎯 Attack Vectors Implemented
+### 2. Governance Takeover
 
-### 1. Oracle Price Manipulation ✅
-**Vulnerability**: Spot price oracle dễ bị manipulate trong cùng transaction
+**Lỗ hổng:** Voting power được kiểm tra tại thời điểm vote, không dùng snapshot trước đó.
 
-**Components**:
-- Vulnerable: `OracleSpot.sol`
-- Secure: `OracleTWAP.sol`
-- Target: `LendingMock.sol`
-- Attacker: `Attacker_Oracle.sol`
-- Demo: `Demo_OracleAttack.s.sol`
+**Thành phần liên quan:**
 
-**Attack Flow**:
-1. Flash swap từ DEX → skew reserves
-2. Oracle đọc giá sai
-3. Over-borrow từ lending
-4. Repay flash swap
-5. Keep profits
+* Vulnerable: `GovernanceWeak.sol`
+* Token: `GovToken.sol`
+* Credit: `FlashLender.sol`
+* Attacker: `Attacker_Governance.sol`
+* Demo: `Demo_GovernanceAttack.s.sol`
 
-**Mitigation**: Use TWAP instead of spot price
+**Luồng tấn công:**
 
-### 2. Governance Takeover ✅
-**Vulnerability**: Voting power checked at vote time, not proposal creation
+1. Attacker flash loan một lượng lớn GOV token
+2. Dùng lượng token đi vay để vote cho proposal
+3. Hoàn trả flash loan trong cùng transaction
+4. Sau đó execute proposal độc hại
 
-**Components**:
-- Vulnerable: `GovernanceWeak.sol`
-- Token: `GovToken.sol`
-- Credit: `FlashLender.sol`
-- Attacker: `Attacker_Governance.sol`
-- Demo: `Demo_GovernanceAttack.s.sol`
+**Kết quả đạt được:**
+Attacker có thể biến voting power tạm thời thành quyền quản trị thực sự, ví dụ chiếm ownership của contract mục tiêu.
 
-**Attack Flow**:
-1. Flash loan GOV tokens
-2. Vote với borrowed power
-3. Repay in same transaction
-4. Execute malicious proposal later
-
-**Mitigation**: Snapshot-based voting
-
-### 3. Vault Share Inflation ✅
-**Vulnerability**: First deposit không burn minimum shares
-
-**Components**:
-- Vulnerable: `VaultBuggy.sol`
-- Secure: `VaultFixed.sol`
-- Attacker: `Attacker_PoolImbalance.sol`
-- Demo: `Demo_PoolAttack.s.sol`
-
-**Attack Flow**:
-1. First deposit với 1 wei
-2. Donate large amount
-3. Victim deposit → 0 shares (rounding)
-4. Attacker withdraw all funds
-
-**Mitigation**: Burn minimum shares (Uniswap V2 style)
+**Biện pháp khắc phục:**
+Dùng **snapshot-based voting**.
 
 ---
 
-## 🔑 Key Features
+### 3. Vault Share Inflation
 
-### Security Features
-- ✅ Both vulnerable AND secure versions
-- ✅ Clear comments explaining bugs
-- ✅ Mitigation examples
-- ✅ Educational purpose
+**Lỗ hổng:** Vault không xử lý an toàn trường hợp first deposit và không burn minimum shares.
 
-### Code Quality
-- ✅ Well-structured
-- ✅ Commented extensively
-- ✅ Follows best practices
-- ✅ Solidity 0.8.19
+**Thành phần liên quan:**
 
-### Documentation
-- ✅ Comprehensive README
-- ✅ Step-by-step tutorials
-- ✅ Quick start guide
-- ✅ Vietnamese language support
+* Vulnerable: `VaultBuggy.sol`
+* Secure: `VaultFixed.sol`
+* Attacker: `Attacker_PoolImbalance.sol`
+* Demo: `Demo_PoolAttack.s.sol`
 
-### Testing & Demos
-- ✅ Full deployment script
-- ✅ 3 attack demo scripts
-- ✅ Ready to run on Anvil/Hardhat
+**Luồng tấn công:**
 
----
+1. Attacker trở thành first depositor với lượng cực nhỏ
+2. Donate thêm lượng tài sản lớn để đẩy giá trị mỗi share lên cao bất thường
+3. Victim deposit nhưng do lỗi rounding nên nhận `0 shares`
+4. Attacker rút toàn bộ tài sản trong vault
 
-## 📊 Statistics
-
-- **Total Files**: 30+ files
-- **Solidity Contracts**: 22 contracts
-- **Lines of Code**: ~3,500+ lines
-- **Documentation**: ~12,000 words
-- **Attack Vectors**: 3 major types
-- **Languages**: Solidity, Markdown
-
----
-
-## 🚀 Quick Start Commands
-
-```bash
-# 1. Build
-forge build
-
-# 2. Start node
-anvil
-
-# 3. Deploy
-forge script script/Deploy.s.sol --rpc-url http://localhost:8545 --broadcast
-
-# 4. Run attacks
-forge script script/Demo_OracleAttack.s.sol --rpc-url http://localhost:8545 --broadcast
-forge script script/Demo_GovernanceAttack.s.sol --rpc-url http://localhost:8545 --broadcast
-forge script script/Demo_PoolAttack.s.sol --rpc-url http://localhost:8545 --broadcast
-```
+**Biện pháp khắc phục:**
+Burn minimum shares theo hướng **Uniswap V2 style** và bổ sung kiểm tra accounting an toàn.
 
 ---
 
 ## 🎓 Learning Outcomes
 
-Sau khi hoàn thành dự án này, bạn sẽ hiểu:
+Sau khi hoàn thành dự án này, người thực hiện có thể hiểu và thực hành được:
 
-1. ✅ Cách DEX (Uniswap V2) hoạt động
-2. ✅ Flash swaps và flash loans
-3. ✅ Oracle vulnerabilities
-4. ✅ Governance attack vectors
-5. ✅ Vault accounting bugs
-6. ✅ Common DeFi exploits
-7. ✅ How to secure protocols
-
----
-
-## ⚠️ Important Notes
-
-- ⚠️ **CHỈ DÙNG ĐỂ HỌC TẬP**
-- ⚠️ Không deploy lên mainnet
-- ⚠️ Không dùng với tiền thật
-- ⚠️ Code có intentional vulnerabilities
-- ⚠️ For educational purposes only
+1. Cách hoạt động của DEX theo mô hình Uniswap V2
+2. Cơ chế flash swap và flash loan
+3. Các lỗ hổng phổ biến trong oracle design
+4. Cách governance có thể bị khai thác
+5. Các lỗi accounting và share minting trong vault
+6. Quy trình xây dựng demo cho các DeFi exploit phổ biến
+7. Các hướng phòng vệ để tăng độ an toàn cho protocol
 
 ---
-
-## 🏆 Project Status
-
-**Status**: ✅ HOÀN THÀNH
-
-**Version**: 1.0.0
-
-**Last Updated**: November 7, 2025
-
-**License**: MIT (Educational Use Only)
-
----
-
-## 📞 Support
-
-Nếu có vấn đề:
-1. Đọc QUICKSTART.md
-2. Đọc TUTORIAL.md  
-3. Check troubleshooting trong docs
-4. Review code comments
-
----
-
-**Built with ❤️ for DeFi Security Education**
-
----
-
-## ✅ Completion Checklist
-
-### Core Components
-- [x] DEX Layer (Factory, Pair, Router)
-- [x] Flash Swap implementation
-- [x] Stable Pool (Curve-like)
-- [x] Oracle Spot (vulnerable)
-- [x] Oracle TWAP (secure)
-- [x] Flash Lender
-- [x] Lending Protocol
-- [x] Governance System
-- [x] Vault System
-
-### Attack Implementations
-- [x] Oracle manipulation attacker
-- [x] Governance takeover attacker
-- [x] Vault inflation attacker
-- [x] Demo scripts for all attacks
-
-### Documentation
-- [x] Comprehensive README
-- [x] Detailed tutorial
-- [x] Quick start guide
-- [x] Code comments
-- [x] Project summary
-
-### Infrastructure
-- [x] Foundry configuration
-- [x] Build scripts
-- [x] Deploy scripts
-- [x] Environment template
-- [x] Git ignore
-
-### Quality
-- [x] Working code
-- [x] Clear architecture
-- [x] Educational value
-- [x] Security awareness
-- [x] Best practices
-
-**ALL TASKS COMPLETED! 🎉**
-
