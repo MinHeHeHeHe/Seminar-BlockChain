@@ -35,19 +35,19 @@ Trong terminal khác:
 forge script script/Demo_OracleAttack.s.sol \
   --rpc-url http://localhost:8545 \
   --broadcast \
-  --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+  --private-key 0x2a871d0798f97d79848a013d4936a73bf4cc922c825d33c1cf7073dff6d409c6
 
 # Demo 2: Governance Attack  
 forge script script/Demo_GovernanceAttack.s.sol \
   --rpc-url http://localhost:8545 \
   --broadcast \
-  --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+  --private-key 0x2a871d0798f97d79848a013d4936a73bf4cc922c825d33c1cf7073dff6d409c6
 
 # Demo 3: Vault Inflation Attack
 forge script script/Demo_PoolAttack.s.sol \
   --rpc-url http://localhost:8545 \
   --broadcast \
-  --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+  --private-key 0x2a871d0798f97d79848a013d4936a73bf4cc922c825d33c1cf7073dff6d409c6
 ```
 
 **Note**: Private key trên là test key mặc định của Anvil, an toàn để dùng cho local testing.
