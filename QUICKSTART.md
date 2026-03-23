@@ -1,11 +1,11 @@
 # Quick Start Guide
 
-## ⚡ 5 Phút Setup & Demo
+## Setup & Demo
 
-### Bước 1: Cài Foundry (nếu chưa có)
+### Bước 1: Cài Foundry
 
 ```bash
-curl -L https://foundry.paradigm.xyz | bash
+curl -L https://foundry.paradigm.xyz
 foundryup
 ```
 
@@ -89,37 +89,8 @@ forge script script/Demo_PoolAttack.s.sol \
 - Donate large amount để inflate share price
 - Victim deposit → receive 0 shares → funds trapped
 
----
-
-## 📖 Đọc Thêm
-
-- **README.md** - Overview đầy đủ về project
-- **TUTORIAL.md** - Hướng dẫn chi tiết từng attack với code explanation
-- **src/** - Source code với comments giải thích vulnerabilities
-
----
 
 ## 🔧 Troubleshooting
-
-### Lỗi "forge: command not found"
-```bash
-# Install Foundry
-curl -L https://foundry.paradigm.xyz | bash
-foundryup
-```
-
-### Lỗi "connection refused"
-```bash
-# Đảm bảo anvil đang chạy
-anvil
-```
-
-### Build errors
-```bash
-# Clean và rebuild
-forge clean
-forge build
-```
 
 ### Muốn xem logs chi tiết
 ```bash
@@ -130,17 +101,4 @@ forge script script/Demo_OracleAttack.s.sol \
   -vvvv
 ```
 
----
-
-## 🎓 Next Steps
-
-1. Đọc code trong `src/` để hiểu vulnerabilities
-2. Chạy các demos và quan sát output
-3. Thử modify attackers để optimize
-4. Implement fixes và test lại
-5. Đọc TUTORIAL.md để hiểu sâu hơn
-
----
-
-**Happy Learning! 🚀**
 

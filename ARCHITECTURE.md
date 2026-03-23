@@ -366,49 +366,4 @@ script/               # Deployment and demos
 ├── Deploy.s.sol      # Deploy all infrastructure
 └── Demo_*.s.sol      # Individual attack demos
 
-test/                 # Tests (Foundry tests)
-└── *.t.sol           # Test files
-```
-
----
-
-## Learning Path
-
-### Beginner → Advanced
-
-```
-Level 1: Understanding Basics
-├─ Read README.md
-├─ Understand ERC20 tokens
-├─ Learn how DEX works
-└─ Run Deploy.s.sol
-
-Level 2: Understanding Vulnerabilities
-├─ Read TUTORIAL.md
-├─ Study OracleSpot vs OracleTWAP
-├─ Understand flash loans
-└─ Run Demo_OracleAttack.s.sol
-
-Level 3: Deep Dive
-├─ Read all contract code
-├─ Understand each attack vector
-├─ Modify attackers
-└─ Run all demos
-
-Level 4: Implementation
-├─ Implement fixes
-├─ Write tests
-├─ Try breaking fixes
-└─ Study real-world exploits
-
-Level 5: Mastery
-├─ Find new attack vectors
-├─ Contribute improvements
-├─ Audit other protocols
-└─ Share knowledge
-```
-
----
-
-**Complete Architecture Documentation** 🏗️
 
