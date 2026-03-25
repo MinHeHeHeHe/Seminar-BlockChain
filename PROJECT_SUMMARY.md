@@ -8,7 +8,7 @@
 
 * Cấu hình Foundry qua `foundry.toml`
 * `package.json` kèm các script hỗ trợ chạy demo
-* Hỗ trợ môi trường local với **Anvil** và **Hardhat node**
+* Hỗ trợ môi trường local với **Anvil**
 * Mẫu cấu hình biến môi trường
 
 ### 2. Protocol Simulation Layer
@@ -67,9 +67,9 @@
 #### Demo Scripts
 
 * `Deploy.s.sol` – Triển khai toàn bộ hạ tầng mô phỏng
-* `Demo_OracleAttack.s.sol` – Demo thao túng oracle
-* `Demo_GovernanceAttack.s.sol` – Demo governance takeover
-* `Demo_PoolAttack.s.sol` – Demo các exploit liên quan đến vault/pool
+* `OracleAttack.s.sol` – Demo thao túng oracle
+* `GovernanceAttack.s.sol` – Demo governance takeover
+* `PoolAttack.s.sol` – Demo các exploit liên quan đến vault/pool
 
 ### 4. Utilities
 
@@ -89,7 +89,7 @@
 * Secure: `OracleTWAP.sol`
 * Target: `LendingMock.sol`
 * Attacker: `Attacker_Oracle.sol`
-* Demo: `Demo_OracleAttack.s.sol`
+* Demo: `OracleAttack.s.sol`
 
 **Luồng tấn công:**
 
@@ -114,7 +114,7 @@ Sử dụng **TWAP** thay vì spot price.
 * Token: `GovToken.sol`
 * Credit: `FlashLender.sol`
 * Attacker: `Attacker_Governance.sol`
-* Demo: `Demo_GovernanceAttack.s.sol`
+* Demo: `GovernanceAttack.s.sol`
 
 **Luồng tấn công:**
 
@@ -140,7 +140,7 @@ Dùng **snapshot-based voting**.
 * Vulnerable: `VaultBuggy.sol`
 * Secure: `VaultFixed.sol`
 * Attacker: `Attacker_PoolImbalance.sol`
-* Demo: `Demo_PoolAttack.s.sol`
+* Demo: `PoolAttack.s.sol`
 
 **Luồng tấn công:**
 

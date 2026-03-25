@@ -15,7 +15,7 @@
 - Secure: `src/oracle/OracleTWAP.sol`
 - Target: `src/targets/LendingMock.sol`
 - Attacker: `src/attackers/Attacker_Oracle.sol`
-- Demo: `script/Demo_OracleAttack.s.sol`
+- Demo: `script/OracleAttack.s.sol`
 
 **Attack Summary**: Flash swap tokens → manipulate reserves → oracle reads wrong price → over-borrow → profit
 
@@ -27,7 +27,7 @@
 - Token: `src/targets/GovToken.sol`
 - Credit: `src/credit/FlashLender.sol`
 - Attacker: `src/attackers/Attacker_Governance.sol`
-- Demo: `script/Demo_GovernanceAttack.s.sol`
+- Demo: `script/GovernanceAttack.s.sol`
 
 **Attack Summary**: Flash loan GOV tokens → vote with borrowed power → repay → execute malicious proposal
 
@@ -38,7 +38,7 @@
 - Vulnerable: `src/targets/VaultBuggy.sol`
 - Secure: `src/targets/VaultFixed.sol`
 - Attacker: `src/attackers/Attacker_PoolImbalance.sol`
-- Demo: `script/Demo_PoolAttack.s.sol`
+- Demo: `script/PoolAttack.s.sol`
 
 **Attack Summary**: First deposit 1 wei → donate large amount → victim gets 0 shares → attacker withdraws all
 
@@ -49,16 +49,16 @@
 
 Sau khi hoàn thành project này, bạn sẽ hiểu:
 
-1. ✅ Cách DEX (Uniswap V2) hoạt động
-2. ✅ Flash swaps và flash loans mechanism
-3. ✅ Oracle manipulation vulnerabilities
-4. ✅ Governance attack vectors
-5. ✅ Vault accounting bugs
-6. ✅ Common DeFi exploits patterns
-7. ✅ How to properly secure protocols
-8. ✅ Differences between spot vs TWAP
-9. ✅ Importance of snapshots in governance
-10. ✅ Share inflation attacks in vaults
+1. Cách DEX (Uniswap V2) hoạt động
+2. Flash swaps và flash loans mechanism
+3. Oracle manipulation vulnerabilities
+4. Governance attack vectors
+5. Vault accounting bugs
+6. Common DeFi exploits patterns
+7. How to properly secure protocols
+8. Differences between spot vs TWAP
+9. Importance of snapshots in governance
+10. Share inflation attacks in vaults
 
 ---
 

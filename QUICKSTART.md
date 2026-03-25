@@ -28,23 +28,23 @@ anvil
 
 ### Bước 4: Run Attack Demos
 
-Trong terminal khác:
+Trong terminal khác: lưu ý thay đổi private key tương ứng khi anvil hiện ra.
 
 ```bash
 # Demo 1: Oracle Manipulation Attack
-forge script script/Demo_OracleAttack.s.sol \
+forge script script/OracleAttack.s.sol \
   --rpc-url http://localhost:8545 \
   --broadcast \
   --private-key 0x2a871d0798f97d79848a013d4936a73bf4cc922c825d33c1cf7073dff6d409c6
 
 # Demo 2: Governance Attack  
-forge script script/Demo_GovernanceAttack.s.sol \
+forge script script/GovernanceAttack.s.sol \
   --rpc-url http://localhost:8545 \
   --broadcast \
   --private-key 0x2a871d0798f97d79848a013d4936a73bf4cc922c825d33c1cf7073dff6d409c6
 
 # Demo 3: Vault Inflation Attack
-forge script script/Demo_PoolAttack.s.sol \
+forge script script/PoolAttack.s.sol \
   --rpc-url http://localhost:8545 \
   --broadcast \
   --private-key 0x2a871d0798f97d79848a013d4936a73bf4cc922c825d33c1cf7073dff6d409c6
@@ -93,7 +93,7 @@ forge script script/Demo_PoolAttack.s.sol \
 ### Muốn xem logs chi tiết
 ```bash
 # Thêm -vvvv để xem full logs
-forge script script/Demo_OracleAttack.s.sol \
+forge script script/OracleAttack.s.sol \
   --rpc-url http://localhost:8545 \
   --broadcast \
   -vvvv

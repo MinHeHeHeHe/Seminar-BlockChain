@@ -43,7 +43,7 @@ Dự án demo các loại tấn công phổ biến trong DeFi (Oracle Manipulati
 │  • Attacker_Oracle.sol        (manipulate oracle → overborrow)    │
 │  • Attacker_Governance.sol    (flash loan GOV → vote)             │
 │  • Attacker_PoolImbalance.sol (exploit vault bugs)                │
-│  • Scripts: Deploy, Demo_Oracle, Demo_Governance, Demo_Pool      │
+│  • Scripts: Deploy, OracleAttack, GovernanceAttack, PoolAttack      │
 └───────────────────────────────────────────────────────────────────┘
 
 

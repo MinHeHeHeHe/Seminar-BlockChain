@@ -364,6 +364,6 @@ src/
 
 script/               # Deployment and demos
 ├── Deploy.s.sol      # Deploy all infrastructure
-└── Demo_*.s.sol      # Individual attack demos
+└── *Attack.s.sol      # Individual attack demos
 
 
