@@ -103,7 +103,7 @@ contract Attacker_Governance {
         
         // Approve repayment
         uint256 repayment = amount + fee;
-        IERC20(token).approve(address(flashLender), repayment);
+        IERC20(token).transfer(address(flashLender), repayment);
         
         return keccak256("ERC3156FlashBorrower.onFlashLoan");
     }
